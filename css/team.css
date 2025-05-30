@@ -1,0 +1,573 @@
+/* Team Page Specific Styles - Mobile Optimized */
+
+/* Team Grid */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-2xl);
+    margin-top: var(--spacing-3xl);
+}
+
+/* Flip Card Container */
+.team-card {
+    background: transparent;
+    width: 100%;
+    height: 400px;
+    perspective: 1000px;
+    margin-bottom: var(--spacing-xl);
+}
+
+.team-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.team-card:hover .team-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Front and Back of Card */
+.team-card-front,
+.team-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-medium);
+    overflow: hidden;
+}
+
+.team-card-front {
+    background: var(--white);
+    border: 2px solid rgba(184, 115, 51, 0.1);
+}
+
+.team-card-back {
+    background: var(--metallic-gradient);
+    color: var(--white);
+    transform: rotateY(180deg);
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    overflow-y: auto;
+}
+
+/* Front Card Content */
+.team-photo {
+    width: 100%;
+    height: 250px;
+    background: var(--metallic-gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.team-photo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="portrait-pattern" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="2" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23portrait-pattern)"/></svg>');
+}
+
+.team-photo i {
+    font-size: 4rem;
+    color: var(--white);
+    z-index: 1;
+    position: relative;
+}
+
+.team-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.team-info {
+    padding: var(--spacing-md);
+    background: var(--white);
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.team-name {
+    color: var(--copper-primary);
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.2;
+}
+
+.team-position {
+    color: var(--gray-medium);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.2;
+}
+
+.team-department {
+    color: var(--brass-accent);
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Mobile Experience Display */
+.mobile-experience {
+    color: var(--sustainable-green);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    display: none;
+}
+
+/* Back Card Content */
+.team-card-back h3 {
+    color: var(--white);
+    margin-bottom: var(--spacing-sm);
+    font-size: var(--font-size-lg);
+    line-height: 1.2;
+}
+
+.back-position {
+    color: var(--brass-accent);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-md);
+    font-weight: 500;
+}
+
+.team-bio {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.4;
+    margin-bottom: var(--spacing-md);
+    font-size: var(--font-size-sm);
+    text-align: center;
+}
+
+.team-skills {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--spacing-md) 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-xs);
+}
+
+.team-skills span {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.team-skills li::before {
+    display: none;
+}
+
+/* Experience Badge */
+.experience-badge {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    background: var(--sustainable-green);
+    color: var(--white);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    z-index: 2;
+}
+
+/* Leadership Badge */
+.leadership-badge {
+    position: absolute;
+    top: 0;
+    left: var(--spacing-md);
+    background: var(--copper-primary);
+    color: var(--white);
+    padding: var(--spacing-xs) var(--spacing-md);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    z-index: 3;
+}
+
+/* Leadership Cards - Special Styling */
+.team-card.leadership .team-card-front {
+    border: 2px solid var(--copper-primary);
+    background: linear-gradient(135deg, var(--white), var(--gray-light));
+}
+
+.team-card.leadership .team-photo {
+    background: linear-gradient(135deg, var(--copper-primary), var(--brass-accent));
+}
+
+/* Contact Information on Back */
+.team-contact {
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    width: 100%;
+}
+
+.team-contact p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: var(--font-size-xs);
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.3;
+}
+
+.team-contact a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.team-contact a:hover {
+    text-decoration: underline;
+}
+
+/* Social Links */
+.team-social {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-md);
+}
+
+.team-social a {
+    width: 30px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: all var(--transition-medium);
+    font-size: var(--font-size-xs);
+}
+
+.team-social a:hover {
+    background: var(--white);
+    color: var(--copper-primary);
+    transform: translateY(-2px);
+}
+
+/* Team Statistics */
+.team-stats {
+    background: var(--gray-light);
+    padding: var(--spacing-3xl) 0;
+    margin: var(--spacing-3xl) 0;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-xl);
+    text-align: center;
+}
+
+.stat-item {
+    background: var(--white);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-light);
+}
+
+.stat-number {
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    color: var(--copper-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.stat-label {
+    color: var(--gray-medium);
+    font-weight: 500;
+}
+
+/* Team Values Section */
+.team-values {
+    background: var(--white);
+    padding: var(--spacing-3xl) 0;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-xl);
+}
+
+.value-item {
+    text-align: center;
+    padding: var(--spacing-xl);
+    background: var(--gray-light);
+    border-radius: var(--radius-lg);
+    transition: transform var(--transition-medium);
+}
+
+.value-item:hover {
+    transform: translateY(-5px);
+}
+
+.value-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--metallic-gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-lg);
+}
+
+.value-icon i {
+    font-size: var(--font-size-xl);
+    color: var(--white);
+}
+
+.value-item h4 {
+    color: var(--copper-primary);
+    margin-bottom: var(--spacing-md);
+}
+
+/* Mobile Responsive for Team */
+@media (max-width: 768px) {
+    .team-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: var(--spacing-xl);
+    }
+    
+    .team-card {
+        height: 420px;
+    }
+    
+    .team-photo {
+        height: 220px;
+    }
+    
+    .team-photo i {
+        font-size: 3rem;
+    }
+    
+    .team-info {
+        padding: var(--spacing-sm);
+        height: 200px;
+    }
+    
+    .team-card-back {
+        padding: var(--spacing-md);
+    }
+    
+    .team-name {
+        font-size: var(--font-size-base);
+    }
+    
+    .team-bio {
+        font-size: var(--font-size-xs);
+        line-height: 1.3;
+    }
+    
+    /* Hide badges on mobile, show experience in info */
+    .mobile-hide {
+        display: none !important;
+    }
+    
+    .mobile-experience {
+        display: block !important;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-lg);
+    }
+    
+    .values-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+    
+    /* Mobile flip card optimization */
+    .team-card-back {
+        padding: var(--spacing-sm);
+        justify-content: flex-start;
+        padding-top: var(--spacing-md);
+    }
+    
+    .team-card-back h3 {
+        font-size: var(--font-size-base);
+        margin-bottom: var(--spacing-xs);
+    }
+    
+    .back-position {
+        font-size: var(--font-size-xs);
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .team-skills span {
+        font-size: 10px;
+        padding: 2px 6px;
+    }
+    
+    .team-contact {
+        margin-top: var(--spacing-sm);
+        padding-top: var(--spacing-sm);
+    }
+}
+
+@media (max-width: 480px) {
+    .team-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+    
+    .team-card {
+        height: 380px;
+    }
+    
+    .team-photo {
+        height: 200px;
+    }
+    
+    .team-photo i {
+        font-size: 2.5rem;
+    }
+    
+    .team-info {
+        height: 180px;
+        padding: var(--spacing-xs);
+    }
+    
+    .team-name {
+        font-size: var(--font-size-sm);
+    }
+    
+    .team-position {
+        font-size: var(--font-size-xs);
+    }
+    
+    .team-department {
+        font-size: 10px;
+    }
+    
+    .mobile-experience {
+        font-size: 10px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .stat-item {
+        padding: var(--spacing-lg);
+    }
+}
+
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+    .team-card-inner {
+        transition: none;
+    }
+    
+    .team-card:hover .team-card-inner {
+        transform: none;
+    }
+    
+    .team-card:focus .team-card-inner,
+    .team-card:active .team-card-inner {
+        transform: rotateY(180deg);
+    }
+}
+
+/* Focus States for Accessibility */
+.team-card:focus {
+    outline: 2px solid var(--copper-primary);
+    outline-offset: 4px;
+}
+
+.team-card:focus .team-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Fix for front/back only elements */
+.front-only {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.back-only {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* When card is flipped */
+.team-card:hover .front-only,
+.team-card.flipped .front-only {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.team-card:hover .back-only,
+.team-card.flipped .back-only {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Hide badges on mobile */
+@media (max-width: 768px) {
+    .front-only {
+        display: none !important;
+    }
+    
+    .mobile-experience {
+        display: block !important;
+    }
+}
+
+/* LinkedIn link styling */
+.team-social a {
+    width: 35px;
+    height: 35px;
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: all var(--transition-medium);
+    font-size: var(--font-size-sm);
+}
+
+.team-social a:hover {
+    background: #0077B5; /* LinkedIn blue */
+    color: var(--white);
+    transform: translateY(-2px);
+}
