@@ -15,32 +15,33 @@ class AnimationController {
     }
 
     // Initialize AOS (Animate On Scroll)
+    // iOS-optimized AOS initialization
     initAOS() {
         if (typeof AOS !== 'undefined') {
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+
             AOS.init({
-                duration: 800,
-                easing: 'ease-out-cubic',
+                duration: isIOS ? 400 : 800, // Shorter duration on iOS
+                easing: 'ease-out',
                 once: true,
-                offset: 100,
+                offset: isIOS ? 50 : 100,
                 delay: 0,
                 anchorPlacement: 'top-bottom',
-                disable: function() {
-                    // Disable on mobile if performance is poor
-                    const maxWidth = 768;
-                    return window.innerWidth < maxWidth && this.isMobileDevice();
-                }.bind(this)
+                disable: function () {
+                    // Disable on iOS devices with small screens
+                    return isIOS && window.innerWidth < 768;
+                }
             });
 
-            // Refresh AOS on dynamic content changes
-            document.addEventListener('contentChanged', () => {
-                AOS.refresh();
-            });
-
-            console.log('AOS initialized successfully');
-        } else {
-            console.warn('AOS library not loaded');
+            // Force refresh on iOS
+            if (isIOS) {
+                setTimeout(() => {
+                    AOS.refresh();
+                }, 100);
+            }
         }
     }
+
 
     // Initialize custom animations
     initCustomAnimations() {
@@ -53,7 +54,7 @@ class AnimationController {
 
     createScrollRevealAnimations() {
         const revealElements = document.querySelectorAll('.reveal-on-scroll');
-        
+
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -73,11 +74,11 @@ class AnimationController {
 
     createTypewriterEffect() {
         const typewriterElements = document.querySelectorAll('.typewriter');
-        
+
         typewriterElements.forEach(element => {
             const text = element.textContent;
             element.textContent = '';
-            
+
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -105,7 +106,7 @@ class AnimationController {
 
     createFloatingElements() {
         const floatingElements = document.querySelectorAll('.floating');
-        
+
         floatingElements.forEach((element, index) => {
             const delay = index * 0.5;
             element.style.animationDelay = `${delay}s`;
@@ -115,10 +116,10 @@ class AnimationController {
 
     initTeamCardAnimations() {
         const teamCards = document.querySelectorAll('.team-card');
-        
+
         teamCards.forEach(card => {
             const cardInner = card.querySelector('.team-card-inner');
-            
+
             if (!cardInner) return;
 
             // Enhanced hover effect
@@ -151,7 +152,7 @@ class AnimationController {
 
     initProductCardAnimations() {
         const productCards = document.querySelectorAll('.product-card');
-        
+
         productCards.forEach(card => {
             // Stagger animation on page load
             const observer = new IntersectionObserver((entries) => {
@@ -181,7 +182,7 @@ class AnimationController {
     animateProductCard(card, action) {
         const img = card.querySelector('.product-img');
         const content = card.querySelector('.product-content');
-        
+
         if (action === 'enter') {
             card.style.transform = 'translateY(-10px) scale(1.02)';
             if (img) img.style.transform = 'scale(1.1)';
@@ -195,13 +196,13 @@ class AnimationController {
 
     initParallaxEffects() {
         const parallaxElements = document.querySelectorAll('.parallax');
-        
+
         if (parallaxElements.length === 0) return;
 
         window.addEventListener('scroll', this.throttle(() => {
             const scrolled = window.pageYOffset;
             const rate = scrolled * -0.5;
-            
+
             parallaxElements.forEach(element => {
                 element.style.transform = `translateY(${rate}px)`;
             });
@@ -211,7 +212,7 @@ class AnimationController {
     initHoverAnimations() {
         // Button hover animations
         const buttons = document.querySelectorAll('.btn');
-        
+
         buttons.forEach(button => {
             button.addEventListener('mouseenter', () => {
                 button.style.transform = 'translateY(-2px) scale(1.02)';
@@ -233,7 +234,7 @@ class AnimationController {
 
         // Image hover animations
         const images = document.querySelectorAll('.image-placeholder, .team-photo');
-        
+
         images.forEach(img => {
             img.addEventListener('mouseenter', () => {
                 img.style.transform = 'scale(1.05)';
@@ -246,7 +247,7 @@ class AnimationController {
 
         // Navigation link animations
         const navLinks = document.querySelectorAll('.nav-link');
-        
+
         navLinks.forEach(link => {
             link.addEventListener('mouseenter', () => {
                 link.style.transform = 'translateY(-2px)';
@@ -303,7 +304,7 @@ class AnimationController {
         if (typeof AOS !== 'undefined') {
             AOS.init({ disable: true });
         }
-        
+
         document.body.classList.add('reduced-motion');
     }
 
@@ -317,7 +318,7 @@ class AnimationController {
 
     throttle(func, limit) {
         let inThrottle;
-        return function() {
+        return function () {
             const args = arguments;
             const context = this;
             if (!inThrottle) {
@@ -344,6 +345,100 @@ class AnimationController {
         });
     }
 }
+
+// iOS Safari Animation Fixes
+class iOSAnimationFix {
+    constructor() {
+        this.isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+        this.isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+        if (this.isIOS || this.isSafari) {
+            this.initIOSFixes();
+        }
+    }
+
+    initIOSFixes() {
+        // Fix AOS for iOS
+        if (typeof AOS !== 'undefined') {
+            AOS.init({
+                duration: 600, // Shorter duration for iOS
+                easing: 'ease-out',
+                once: true,
+                offset: 50,
+                disable: function () {
+                    return window.innerWidth < 768; // Disable on mobile
+                }
+            });
+        }
+
+        // Fix team card interactions for iOS
+        this.fixTeamCards();
+
+        // Force repaint on scroll
+        this.forceRepaint();
+    }
+
+    fixTeamCards() {
+        const teamCards = document.querySelectorAll('.team-card');
+
+        teamCards.forEach(card => {
+            // Add touch event listeners
+            card.addEventListener('touchstart', this.handleTouchStart.bind(this), { passive: true });
+            card.addEventListener('touchend', this.handleTouchEnd.bind(this), { passive: true });
+
+            // Force hardware acceleration
+            card.style.webkitTransform = 'translate3d(0,0,0)';
+            card.style.transform = 'translate3d(0,0,0)';
+        });
+    }
+
+    handleTouchStart(e) {
+        this.touchStartTime = Date.now();
+    }
+
+    handleTouchEnd(e) {
+        const touchDuration = Date.now() - this.touchStartTime;
+
+        if (touchDuration < 500) { // Quick tap
+            const card = e.currentTarget;
+            card.classList.toggle('mobile-flipped');
+
+            // Force repaint
+            card.style.transform = 'translateZ(0)';
+            setTimeout(() => {
+                card.style.transform = '';
+            }, 10);
+        }
+    }
+
+    forceRepaint() {
+        let ticking = false;
+
+        const update = () => {
+            // Force repaint of animated elements
+            const animatedElements = document.querySelectorAll('[data-aos], .team-card, .product-card');
+            animatedElements.forEach(el => {
+                el.style.transform = el.style.transform;
+            });
+            ticking = false;
+        };
+
+        const requestTick = () => {
+            if (!ticking) {
+                requestAnimationFrame(update);
+                ticking = true;
+            }
+        };
+
+        window.addEventListener('scroll', requestTick, { passive: true });
+    }
+}
+
+// Initialize iOS fixes
+document.addEventListener('DOMContentLoaded', () => {
+    new iOSAnimationFix();
+});
+
 
 // Initialize animations when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {

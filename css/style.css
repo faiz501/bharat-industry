@@ -1556,4 +1556,59 @@ a[href="terms-of-service.html"] {
         margin: 0 auto 1rem auto; /* Center on mobile */
     }
 }
+/* iOS Safari Animation Fixes */
+* {
+    -webkit-transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+}
 
+/* Force hardware acceleration on iOS */
+.team-card,
+.product-card,
+.mission-card,
+.hero-content,
+[data-aos] {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+}
+
+/* Fix AOS animations for iOS */
+[data-aos] {
+    -webkit-transition-property: transform, opacity;
+    transition-property: transform, opacity;
+    -webkit-transition-timing-function: ease;
+    transition-timing-function: ease;
+}
+
+/* Team card flip fixes for iOS */
+.team-card-inner {
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.team-card-front,
+.team-card-back {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+/* Hover animations for touch devices */
+@media (hover: none) and (pointer: coarse) {
+    .team-card:hover .team-card-inner {
+        transform: none;
+    }
+    
+    .team-card.mobile-flipped .team-card-inner {
+        -webkit-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+    }
+}
