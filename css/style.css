@@ -1612,3 +1612,7 @@ a[href="terms-of-service.html"] {
         transform: rotateY(180deg);
     }
 }
+
+.golden{
+    color: rgb(225, 193, 110)
+}
