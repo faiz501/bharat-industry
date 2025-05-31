@@ -87,6 +87,47 @@ class NakodaMetalIndustries {
         this.setupIntersectionObserver();
     }
 
+    // Add this to the BharatIndustries class in main.js
+
+    registerServiceWorker() {
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+
+                        // Check for updates
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    // New content available, show update notification
+                                    this.showUpdateNotification();
+                                }
+                            });
+                        });
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    }
+
+    showUpdateNotification() {
+        const notification = document.createElement('div');
+        notification.innerHTML = `
+    <div style="position: fixed; top: 20px; right: 20px; background: #B87333; color: white; padding: 15px 20px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); z-index: 10000; max-width: 300px;">
+      <p style="margin: 0 0 10px 0; font-weight: 600;">Update Available</p>
+      <p style="margin: 0 0 15px 0; font-size: 14px;">A new version of the website is available.</p>
+      <button onclick="window.location.reload()" style="background: white; color: #B87333; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: 600;">Update Now</button>
+      <button onclick="this.parentElement.parentElement.remove()" style="background: transparent; color: white; border: 1px solid white; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-left: 8px;">Later</button>
+    </div>
+  `;
+        document.body.appendChild(notification);
+    }
+
+
     setupMobileMenu() {
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('nav-menu');
