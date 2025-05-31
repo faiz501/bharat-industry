@@ -491,8 +491,8 @@ class NakodaMetalIndustries {
 
     preloadCriticalResources() {
         const criticalImages = [
-            'images/hero-bg.jpg',
-            'images/about-facility.jpg'
+            'images/header-logo.png',
+            'images/team-person-3.jpeg'
         ];
 
         criticalImages.forEach(src => {
