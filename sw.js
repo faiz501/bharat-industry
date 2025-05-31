@@ -20,7 +20,7 @@ const STATIC_ASSETS = [
   '/js/main.js',
   '/js/animations.js',
   '/data/config.json',
-  '/images/logo.png',
+  '/images/header-logo.png',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css',
   'https://unpkg.com/aos@2.3.1/dist/aos.css',
   'https://unpkg.com/aos@2.3.1/dist/aos.js'
@@ -28,8 +28,8 @@ const STATIC_ASSETS = [
 
 // Images to cache on demand
 const IMAGE_ASSETS = [
-  '/images/hero-bg.jpg',
-  '/images/about-facility.jpg'
+  '/images/hero-img.jpg',
+  'team-person-3.jpeg'
 ];
 
 // Cache size limits
