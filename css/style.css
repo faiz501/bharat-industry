@@ -980,36 +980,6 @@ ul li::before {
 /* Back to Top Button */
 .back-to-top {
     position: fixed;
-    bottom: var(--spacing-xl);
-    right: var(--spacing-xl);
-    width: 50px;
-    height: 50px;
-    background: var(--metallic-gradient);
-    color: var(--white);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: var(--font-size-lg);
-    box-shadow: var(--shadow-medium);
-    opacity: 0;
-    visibility: hidden;
-    transition: all var(--transition-medium);
-    z-index: 1000;
-}
-
-.back-to-top.show {
-    opacity: 1;
-    visibility: visible;
-}
-
-.back-to-top:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-heavy);
-}
-
-/*
-.back-to-top {
-    position: fixed;
     bottom: 20px;
     right: 20px;
     width: 56px;
@@ -1020,27 +990,17 @@ ul li::before {
     border-radius: 50%;
     cursor: pointer;
     font-size: 20px;
-    box-shadow: 0 4px 12px rgba(184, 115, 51, 0.3);
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
     transition: all 0.3s ease;
     z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    min-width: 44px;
-    min-height: 44px;
-   
-    user-select: none;
-    -webkit-user-select: none;
-    
-    -webkit-tap-highlight-color: transparent;
 }
 
 .back-to-top.show {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
 }
 
 .back-to-top:hover {
@@ -1052,21 +1012,20 @@ ul li::before {
     transform: scale(0.95);
 }
 
-// Mobile specific positioning 
 @media (max-width: 768px) {
     .back-to-top {
-        bottom: 80px; // Move higher to avoid bottom navigation 
+        bottom: 80px;
         right: 16px;
         width: 48px;
         height: 48px;
         font-size: 18px;
-        z-index: 10000; // Higher z-index for mobile 
+        z-index: 10000;
     }
 }
 
 @media (max-width: 480px) {
     .back-to-top {
-        bottom: 70px; // Even higher for smaller screens 
+        bottom: 70px;
         right: 12px;
         width: 44px;
         height: 44px;
@@ -1074,14 +1033,11 @@ ul li::before {
     }
 }
 
-// Ensure it's above mobile browser UI 
 @media (max-width: 768px) and (orientation: portrait) {
     .back-to-top {
         bottom: calc(env(safe-area-inset-bottom) + 20px);
     }
 }
-
-*/
 
 /* Mobile Responsive Design */
 @media (max-width: 768px) {

@@ -87,8 +87,6 @@ class NakodaMetalIndustries {
         this.setupIntersectionObserver();
     }
 
-    // Add this to the BharatIndustries class in main.js
-
     registerServiceWorker() {
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
@@ -280,7 +278,15 @@ class NakodaMetalIndustries {
     initializeBackToTop() {
         const backToTopBtn = document.getElementById('backToTop');
 
-        if (!backToTopBtn) return;
+        if (!backToTopBtn) {
+            console.log('Button not found during initialization');
+            return;
+        }
+
+        // Add scroll listener
+        window.addEventListener('scroll', () => {
+            this.updateBackToTop();
+        });
 
         backToTopBtn.addEventListener('click', () => {
             window.scrollTo({
@@ -290,17 +296,31 @@ class NakodaMetalIndustries {
         });
     }
 
+
     updateBackToTop() {
         const backToTopBtn = document.getElementById('backToTop');
 
         if (!backToTopBtn) return;
 
-        if (window.scrollY > 300) {
+        // Get the hero section by ID since your hero section has id="home"
+        const heroSection = document.getElementById('home');
+
+        let triggerPoint = 300; // Default fallback
+
+        if (heroSection) {
+            // Show button after scrolling past hero section
+            triggerPoint = heroSection.offsetHeight - 100; // Small buffer
+        }
+
+        if (window.scrollY > triggerPoint) {
             backToTopBtn.classList.add('show');
         } else {
             backToTopBtn.classList.remove('show');
         }
     }
+
+
+
 
     initializeCounters() {
         const counters = document.querySelectorAll('.stat-number');
