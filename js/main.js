@@ -511,7 +511,7 @@ class NakodaMetalIndustries {
 
     preloadCriticalResources() {
         const criticalImages = [
-            'images/logo.webp.png',
+            'images/logo.webp',
             'images/team-person-3.jpeg'
         ];
 
