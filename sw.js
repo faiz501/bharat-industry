@@ -28,7 +28,7 @@ const STATIC_ASSETS = [
 
 // Images to cache on demand
 const IMAGE_ASSETS = [
-  '/images/hero-img.jpg',
+  '/images/hero-img.webp',
   'team-person-3.jpeg'
 ];
 
