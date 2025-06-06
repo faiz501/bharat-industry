@@ -20,7 +20,7 @@ const STATIC_ASSETS = [
   '/js/main.js',
   '/js/animations.js',
   '/data/config.json',
-  '/images/header-logo.png',
+  '/images/logo.webp',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css',
   'https://unpkg.com/aos@2.3.1/dist/aos.css',
   'https://unpkg.com/aos@2.3.1/dist/aos.js'
