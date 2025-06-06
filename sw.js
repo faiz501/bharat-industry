@@ -226,7 +226,7 @@ function handleDynamicRequest(request) {
             <!DOCTYPE html>
             <html>
             <head>
-              <title>Offline - Bharat Industries</title>
+              <title>Offline - Nakoda Metal Industries</title>
               <style>
                 body { 
                   font-family: Arial, sans-serif; 
@@ -258,7 +258,7 @@ function handleDynamicRequest(request) {
             </head>
             <body>
               <div class="offline-container">
-                <div class="logo">⚙️ Bharat Industries</div>
+                <div class="logo">⚙️ Nakoda Metal Industries</div>
                 <h1>You're Offline</h1>
                 <p>It looks like you're not connected to the internet. Some content may not be available, but you can still browse cached pages.</p>
                 <button class="retry-btn" onclick="window.location.reload()">Retry Connection</button>
@@ -345,8 +345,8 @@ self.addEventListener('push', event => {
     const data = event.data.json();
     const options = {
       body: data.body,
-      icon: '/images/logo.png',
-      badge: '/images/logo.png',
+      icon: '/images/logo.webp',
+      badge: '/images/logo.webp',
       vibrate: [100, 50, 100],
       data: data.data || {}
     };
