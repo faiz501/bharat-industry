@@ -288,11 +288,6 @@ ul li::before {
     line-height: 1.2;
 }
 
-.nav-logo h2 a {
-    color: var(--copper-primary);
-    text-decoration: none;
-    
-}
 
 .nav-logo .location {
     font-size: var(--font-size-sm);
@@ -335,6 +330,14 @@ ul li::before {
     width: 100%;
 }
 
+#x:active{
+    color: var(--copper-primary);
+}
+
+.nav-logo h2 a {
+    color: var(--copper-primary);
+    text-decoration: none;
+}
 /* Hamburger Menu */
 .hamburger {
     display: none;
