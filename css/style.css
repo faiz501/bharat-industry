@@ -281,9 +281,16 @@ ul li::before {
 }
 
 .nav-logo h2 {
-    color: var(--copper-primary);
     margin: 0;
-    font-size: var(--font-size-xl);
+    color: var(--copper-primary);
+    font-size: var(--font-size-2xl); 
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.nav-logo h2 a {
+    color: var(--copper-primary);
+    text-decoration: none; /* removes underline */
 }
 
 .nav-logo .location {
