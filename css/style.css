@@ -290,7 +290,8 @@ ul li::before {
 
 .nav-logo h2 a {
     color: var(--copper-primary);
-    text-decoration: none; /* removes underline */
+    text-decoration: none;
+    
 }
 
 .nav-logo .location {
