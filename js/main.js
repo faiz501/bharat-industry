@@ -468,11 +468,6 @@ class NakodaMetalIndustries {
     initializePerformanceOptimizations() {
         // Preload critical resources
         this.preloadCriticalResources();
-
-        // Initialize service worker if available
-        if ('serviceWorker' in navigator) {
-            this.registerServiceWorker();
-        }
     }
 
     preloadCriticalResources() {
