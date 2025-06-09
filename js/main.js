@@ -296,21 +296,12 @@ class NakodaMetalIndustries {
         });
     }
 
-
     updateBackToTop() {
         const backToTopBtn = document.getElementById('backToTop');
-
         if (!backToTopBtn) return;
 
-        // Get the hero section by ID since your hero section has id="home"
-        const heroSection = document.getElementById('home');
-
-        let triggerPoint = 300; // Default fallback
-
-        if (heroSection) {
-            // Show button after scrolling past hero section
-            triggerPoint = heroSection.offsetHeight - 100; // Small buffer
-        }
+        // Show button when viewport height is scrolled (works on all screen sizes)
+        const triggerPoint = window.innerHeight * 0.8;
 
         if (window.scrollY > triggerPoint) {
             backToTopBtn.classList.add('show');
@@ -318,7 +309,6 @@ class NakodaMetalIndustries {
             backToTopBtn.classList.remove('show');
         }
     }
-
 
 
 
